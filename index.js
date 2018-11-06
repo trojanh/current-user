@@ -29,7 +29,8 @@ const Plugin = {
   name: "current-user",
   version: "0.0.1",
   register: async (server, options) => {
-    let { authColumn, property } = options;
+    const { authColumn, model } = options;
+    let { property } = options;
 
     if (!property) {
       property = "currentUser";
@@ -37,20 +38,26 @@ const Plugin = {
 
     server.ext("onPreHandler", async (request, handler) => {
       try {
+        // fetch currentUser credentials from hapi-auth-jwt2
         const {
           auth: {
             credentials: { currentUser }
           }
         } = request;
+
+        // fetch given authColumn value
         const authValue = currentUser[authColumn];
+
+        // prepare where query to find object
         const whereQuery = {};
         whereQuery[authColumn] = authValue;
-        request.currentUser = await User.findOne({
+
+        // find object with given model
+        request[property] = await model.findOne({
           where: whereQuery
         });
       } catch (error) {
-        console.error(error);
-        request.currentUser = null;
+        request[property] = null;
       }
 
       return handler.continue;
