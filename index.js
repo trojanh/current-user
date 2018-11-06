@@ -24,7 +24,6 @@
  * Note: @property[authColumn] can be anything which
  *       is used to authenticate user.
  */
-import { User } from "../app/models";
 
 const Plugin = {
   name: "current-user",
