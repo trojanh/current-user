@@ -1,0 +1,17 @@
+{
+  "name": "current-user",
+  "version": "0.0.1",
+  "description": "A plugin to fetch current logged in user.",
+  "main": "index.js",
+  "repository": "https://github.com/vemarav/current-user",
+  "author": "Aravind Vemula",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "hapi": "^17.7.0",
+    "hapi-auth-jwt2": "^8.1.0"
+  },
+  "devDependencies": {
+    "lab": "^17.3.0"
+  }
+}
