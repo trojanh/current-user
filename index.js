@@ -49,6 +49,7 @@ const Plugin = {
           where: whereQuery
         });
       } catch (error) {
+        console.error(error);
         request.currentUser = null;
       }
 
