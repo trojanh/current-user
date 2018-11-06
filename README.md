@@ -1,4 +1,4 @@
-# current-user
+# hapi-current-user
 
 This plugin supprots only [Hapi](https://hapijs.com) and assumes you are using [hapi-auth-jwt2](https://www.npmjs.com/package/hapi-auth-jwt2) for authentication
 
@@ -30,8 +30,8 @@ This plugin supprots only [Hapi](https://hapijs.com) and assumes you are using [
 2. Register plugin in server.js
 
    ```js
-   import currentUser from "current-user";
-   import currentUserOptions from "current-user";
+   import currentUser from "hapi-current-user";
+   import currentUserOptions from "hapi-current-user";
 
    await server.register({
      plugin: currentUser,
@@ -65,7 +65,7 @@ This plugin supprots only [Hapi](https://hapijs.com) and assumes you are using [
 **Example**
 
 ```js
-import currentUser from "current-user";
+import currentUser from "hapi-current-user";
 import loginuser from "/path/to/loginUser";
 import { User } from "/path/to/models";
 

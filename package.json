@@ -1,5 +1,5 @@
 {
-  "name": "current-user",
+  "name": "hapi-current-user",
   "version": "0.0.1",
   "description": "A plugin to fetch current logged in user.",
   "main": "index.js",

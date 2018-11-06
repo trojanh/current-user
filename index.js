@@ -1,10 +1,10 @@
-/** *** plugin: current-user 😎  ***
+/** *** plugin: hapi-current-user 😎  ***
  * This plugin adds
  * @property[currentUser] on request object.
  * import plugin and regester with server
  *    file: server.js
  *    ====================================================
- *    import currentUser from "current-user";
+ *    import currentUser from "hapi-current-user";
  *    import { User } from "/path/to/models"; // sequelize
  *
  *    server.register({
@@ -26,7 +26,7 @@
  */
 
 const Plugin = {
-  name: "current-user",
+  name: "hapi-current-user",
   version: "0.0.1",
   register: async (server, options) => {
     const { authColumn, model } = options;
