@@ -57,6 +57,10 @@ const Plugin = {
           where: whereQuery
         });
       } catch (error) {
+        if (!(error.name === "TypeError")) {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        }
         request[property] = null;
       }
 
