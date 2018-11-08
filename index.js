@@ -27,24 +27,26 @@
 
 const Plugin = {
   name: "hapi-current-user",
-  version: "0.0.2",
+  version: "0.0.3",
   register: async (server, options) => {
-    const { authColumn, model } = options;
-    let { property } = options;
+    const { model } = options;
+    let { authColumn, property } = options;
 
     if (!property) {
       property = "currentUser";
     }
 
-    server.ext("onPreHandler", async (request, handler) => {
-      try {
-        // fetch currentUser credentials from hapi-auth-jwt2
-        const {
-          auth: {
-            credentials: { currentUser }
-          }
-        } = request;
+    if (!authColumn) {
+      throw new TypeError("provide authColumn");
+    }
 
+    server.ext("onPreHandler", async (request, handler) => {
+      // fetch currentUser credentials from hapi-auth-jwt2
+      const {
+        auth: { credentials }
+      } = request;
+      if (credentials) {
+        const { currentUser } = credentials;
         // fetch given authColumn value
         const authValue = currentUser[authColumn];
 
@@ -56,14 +58,9 @@ const Plugin = {
         request[property] = await model.findOne({
           where: whereQuery
         });
-      } catch (error) {
-        if (!(error.name === "TypeError")) {
-          // eslint-disable-next-line no-console
-          console.error(error);
-        }
+      } else {
         request[property] = null;
       }
-
       return handler.continue;
     });
   }

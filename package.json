@@ -1,6 +1,6 @@
 {
   "name": "hapi-current-user",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A plugin to fetch current logged in user.",
   "main": "index.js",
   "repository": "https://github.com/vemarav/current-user",
