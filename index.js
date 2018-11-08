@@ -27,7 +27,7 @@
 
 const Plugin = {
   name: "hapi-current-user",
-  version: "0.0.1",
+  version: "0.0.2",
   register: async (server, options) => {
     const { authColumn, model } = options;
     let { property } = options;
