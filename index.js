@@ -17,7 +17,10 @@
  *        model: User,
  *        // @property[authColumn] can be email or username
  *        // whichever you are using to generate token
- *        authColumn: 'email'
+ *        authColumn: 'email',
+ *        // to check extra column value like if user id archived or not
+ *        queryColumns: {deleted_at: null},
+ *        
  *      }
  *    })
  *
@@ -30,7 +33,7 @@ const Plugin = {
   version: "0.0.3",
   register: async (server, options) => {
     const { model } = options;
-    let { authColumn, property } = options;
+    let { authColumn, property, queryColumns } = options;
 
     if (!property) {
       property = "currentUser";
@@ -51,13 +54,15 @@ const Plugin = {
         const authValue = currentUser[authColumn];
 
         // prepare where query to find object
-        const whereQuery = {};
+        const whereQuery = queryColumns ;
         whereQuery[authColumn] = authValue;
 
         // find object with given model
         request[property] = await model.findOne({
           where: whereQuery
         });
+        
+        if (!request[property]) throw `${model} not found`;
       } else {
         request[property] = null;
       }
